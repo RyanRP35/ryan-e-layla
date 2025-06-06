@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ryan & Layla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            background: #0d1b2a;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            padding: 30px 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 1.4em;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.5em;
+        }
+
+        img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .counter {
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: float 8s infinite ease-in;
+        }
+
+        @keyframes float {
+            0% {transform: translateY(0);}
+            100% {transform: translateY(-100vh);}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Com você, cada segundo vale a pena. Nosso amor é leve, forte e infinito. Obrigado por ser minha melhor escolha todos os dias 💕</h1>
+        <img src="photo.jpg" alt="Foto do casal">
+        <div class="counter" id="timeTogether"></div>
+    </div>
+
+    <script>
+        const startDate = new Date("2024-06-24T01:00:00");
+
+        function updateCounter() {
+            const now = new Date();
+            let delta = Math.floor((now - startDate) / 1000);
+
+            const years = Math.floor(delta / (365.25 * 24 * 60 * 60));
+            delta -= years * 365.25 * 24 * 60 * 60;
+
+            const months = Math.floor(delta / (30.44 * 24 * 60 * 60));
+            delta -= months * 30.44 * 24 * 60 * 60;
+
+            const days = Math.floor(delta / (24 * 60 * 60));
+            delta -= days * 24 * 60 * 60;
+
+            const hours = Math.floor(delta / 3600);
+            delta -= hours * 3600;
+
+            const minutes = Math.floor(delta / 60);
+            const seconds = delta % 60;
+
+            document.getElementById("timeTogether").innerHTML =
+                `Juntos:<br><strong>${years} ano${years !== 1 ? 's' : ''}, ${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}<br>${hours} hora${hours !== 1 ? 's' : ''}, ${minutes} minuto${minutes !== 1 ? 's' : ''} e ${seconds} segundo${seconds !== 1 ? 's' : ''}</strong>`;
+        }
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // Corações flutuando
+        const colors = ['#ff4d6d', '#ff99ac', '#ffccd5'];
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+            heart.style.fontSize = 15 + Math.random() * 15 + "px";
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
