@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ryan & Layla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2em;
+        }
+        .mensagem-principal {
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #ffc0cb;
+        }
+        .frases {
+            margin-top: 15px;
+            font-size: 1.5em;
+            min-height: 80px;
+            animation: fadein 2s;
+        }
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .foto-central {
+            margin-top: 30px;
+        }
+        .foto-central img {
+            max-width: 90%;
+            max-height: 60vh;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+        .contador {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música -->
+    <audio autoplay loop id="musica">
+        <source src="musica/ryan_e_layla_musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+    <script>
+        const musica = document.getElementById('musica');
+        musica.volume = 0.1;
+    </script>
+
+    <h1>Ryan & Layla</h1>
+    <div class="mensagem-principal">Desde que você chegou, tudo ficou mais leve e cheio de cor.</div>
+
+    <div class="frases" id="frase-romantica"></div>
+
+    <div class="foto-central">
+        <img id="foto-rotativa" src="fotos/1.jpeg" alt="Foto do casal">
+    </div>
+
+    <div class="contador" id="contador"></div>
+
+    <script>
+        // Frases rotativas
+        const frases = [
+            "Com você, todos os dias ganham cor.",
+            "Te amar é o melhor presente da minha vida.",
+            "Cada segundo com você é eterno no meu coração.",
+            "De todos os lugares do mundo, o melhor é ao seu lado.",
+            "Desde que você chegou, tudo ficou mais leve e cheio de cor."
+        ];
+        let fraseAtual = 0;
+        function trocarFrase() {
+            const el = document.getElementById("frase-romantica");
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.textContent = frases[fraseAtual];
+                el.style.opacity = 1;
+                fraseAtual = (fraseAtual + 1) % frases.length;
+            }, 500);
+        }
+        trocarFrase();
+        setInterval(trocarFrase, 6000);
+
+        // Fotos rotativas
+        const fotos = [
+            "fotos/1.jpeg",
+            "fotos/2.jpeg",
+            "fotos/3.jpeg",
+            "fotos/4.jpeg",
+            "fotos/5.jpeg",
+            "fotos/6.jpeg"
+        ];
+        let fotoAtual = 0;
+        function trocarFoto() {
+            const img = document.getElementById("foto-rotativa");
+            fotoAtual = (fotoAtual + 1) % fotos.length;
+            img.src = fotos[fotoAtual];
+        }
+        setInterval(trocarFoto, 5000);
+
+        // Contador de tempo juntos
+        const inicio = new Date("2024-06-24T01:00:00");
+        function atualizarContador() {
+            const agora = new Date();
+            const diff = agora - inicio;
+
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diff / (1000 * 60)) % 60);
+            const segundos = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("contador").textContent =
+                `Juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos.`;
+        }
+        atualizarContador();
+        setInterval(atualizarContador, 1000);
+    </script>
+</body>
+</html>
