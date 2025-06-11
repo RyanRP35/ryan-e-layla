@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ryan & Layla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        h1 {
+            margin-top: 30px;
+            font-size: 2em;
+        }
+        .frase-principal {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #ffb6c1;
+            padding: 0 20px;
+        }
+        .frases-rotativas {
+            margin-top: 20px;
+            font-size: 1.5em;
+            min-height: 60px;
+            color: #fff;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .contador {
+            margin-top: 30px;
+            font-size: 1.1em;
+            color: #ccc;
+        }
+        .foto-central img {
+            margin-top: 30px;
+            max-width: 90vw;
+            max-height: 60vh;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+        .coraçoes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .coraçoes span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(45deg);
+            margin-top: -10px;
+            animation: cair 10s linear infinite;
+        }
+        .coraçoes span::before, .coraçoes span::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+        .coraçoes span::before {
+            top: -10px;
+            left: 0;
+        }
+        .coraçoes span::after {
+            top: 0;
+            left: -10px;
+        }
+        @keyframes cair {
+            0% {transform: translateY(-100px) rotate(45deg); opacity: 1;}
+            100% {transform: translateY(100vh) rotate(45deg); opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música de fundo -->
+    <audio autoplay loop id="musica">
+        <source src="ryan_e_layla_musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+    <script>
+        document.getElementById("musica").volume = 0.1;
+    </script>
+
+    <!-- Corações animados -->
+    <div class="coraçoes" id="coraçoes-container"></div>
+    <script>
+        const container = document.getElementById('coraçoes-container');
+        for (let i = 0; i < 30; i++) {
+            let heart = document.createElement('span');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+            container.appendChild(heart);
+        }
+    </script>
+
+    <h1>Ryan & Layla</h1>
+    <div class="frase-principal">Com você, cada segundo vale a pena. Nosso amor é leve, forte e infinito. Obrigado por ser minha melhor escolha todos os dias 💕</div>
+    <div class="frases-rotativas" id="frase"></div>
+
+    <div class="foto-central">
+        <img src="fotos/1.jpeg" alt="Foto do casal">
+    </div>
+
+    <div class="contador" id="contador"></div>
+
+    <script>
+        const frases = [
+            "Com você, todos os dias ganham cor.",
+            "Te amar é o melhor presente da minha vida.",
+            "Cada segundo com você é eterno no meu coração.",
+            "De todos os lugares do mundo, o melhor é ao seu lado."
+        ];
+        let fraseIndex = 0;
+        function trocarFrase() {
+            const el = document.getElementById("frase");
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.textContent = frases[fraseIndex];
+                el.style.opacity = 1;
+                fraseIndex = (fraseIndex + 1) % frases.length;
+            }, 500);
+        }
+        trocarFrase();
+        setInterval(trocarFrase, 6000);
+
+        const inicio = new Date("2024-06-24T01:00:00");
+        function atualizarContador() {
+            const agora = new Date();
+            const diff = agora - inicio;
+
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diff / (1000 * 60)) % 60);
+            const segundos = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("contador").textContent =
+                `Juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos.`;
+        }
+        atualizarContador();
+        setInterval(atualizarContador, 1000);
+    </script>
+</body>
+</html>
