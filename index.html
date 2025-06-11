@@ -1,216 +1,101 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ryan & Layla</title>
-<style>
-  /* Fundo azul escuro */
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #001f3f; /* azul escuro */
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-    padding: 40px 20px 80px;
-  }
-
-  /* Corações animados */
-  .heart {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    background-color: #ff6584;
-    transform: rotate(-45deg);
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
-    border-radius: 3px 3px 0 0;
-  }
-  .heart::before,
-  .heart::after {
-    content: "";
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background-color: #ff6584;
-    border-radius: 50%;
-  }
-  .heart::before {
-    top: -6px;
-    left: 0;
-  }
-  .heart::after {
-    left: 6px;
-    top: 0;
-  }
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0) rotate(-45deg);
-      opacity: 0.8;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ryan ❤️ Layla</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow-x: hidden;
     }
-    100% {
-      transform: translateY(-120vh) rotate(-45deg);
-      opacity: 0;
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.imgur.com/w1WcE3T.png'); /* fundo com corações */
+      background-size: contain;
+      background-repeat: repeat;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
     }
-  }
 
-  /* Container central */
-  .container {
-    max-width: 480px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-  }
-
-  /* Frase principal fixa */
-  .main-phrase {
-    font-size: 1.3rem;
-    line-height: 1.5;
-    margin-bottom: 32px;
-    font-weight: 600;
-    color: #ffe6f0;
-    text-shadow: 0 0 6px #ff6584cc;
-  }
-
-  /* Imagem estática */
-  .photo {
-    width: 100%;
-    max-width: 360px;
-    height: auto;
-    border-radius: 14px;
-    box-shadow: 0 0 12px #ff6584cc;
-    margin-bottom: 36px;
-    user-select: none;
-  }
-
-  /* Contador estilo do exemplo */
-  .counter {
-    font-family: 'Courier New', Courier, monospace;
-    background: #012a57;
-    border: 2px solid #ff6584;
-    border-radius: 12px;
-    padding: 20px 30px;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    color: #ff6584;
-    display: inline-flex;
-    gap: 16px;
-    user-select: none;
-    box-shadow: 0 0 10px #ff6584bb;
-  }
-  .counter > div {
-    text-align: center;
-  }
-  .counter .number {
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 1;
-  }
-  .counter .label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    opacity: 0.75;
-    margin-top: 4px;
-    letter-spacing: 1.5px;
-  }
-
-  /* Responsividade simples */
-  @media (max-width: 480px) {
-    .main-phrase {
-      font-size: 1.1rem;
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
     }
+
     .photo {
-      max-width: 100%;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 30px;
+      box-shadow: 0 0 40px 10px #ff69b4;
+      margin-top: 20px;
     }
-    .counter {
-      padding: 16px 20px;
-      font-size: 1rem;
-      gap: 12px;
+
+    h1 {
+      font-size: 2.5em;
+      margin: 20px 0 10px;
     }
-    .counter .number {
-      font-size: 1.6rem;
+
+    .timer {
+      font-size: 1.5em;
+      margin: 10px 0 30px;
     }
-  }
-</style>
+
+    .message {
+      font-size: 1.2em;
+      max-width: 90%;
+      margin: auto;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="main-phrase">
-    Com você, cada segundo vale a pena. Nosso amor é leve, forte e infinito.<br>
-    Obrigado por ser minha melhor escolha todos os dias 💕
+  <div class="hearts"></div>
+
+  <div class="container">
+    <img src="foto.jpg" alt="Foto do casal" class="photo" />
+    
+    <h1>Ryan ❤️ Layla</h1>
+
+    <div class="timer" id="timer">Carregando...</div>
+
+    <p class="message">
+      Com você, cada segundo vale a pena. Nosso amor é leve, forte e infinito. Obrigado por ser minha melhor escolha todos os dias 💕
+    </p>
   </div>
 
-  <img src="https://user-images.githubusercontent.com/11634679/179497598-cb53f095-973b-49d8-81ae-43865e12f3d2.jpg" alt="Ryan & Layla" class="photo" />
+  <script>
+    const startDate = new Date("2024-06-24T01:00:00");
 
-  <div class="counter" aria-label="Contador de tempo juntos">
-    <div>
-      <div class="number" id="days">0</div>
-      <div class="label">Dias</div>
-    </div>
-    <div>
-      <div class="number" id="hours">0</div>
-      <div class="label">Horas</div>
-    </div>
-    <div>
-      <div class="number" id="minutes">0</div>
-      <div class="label">Minutos</div>
-    </div>
-    <div>
-      <div class="number" id="seconds">0</div>
-      <div class="label">Segundos</div>
-    </div>
-  </div>
-</div>
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
 
-<script>
-  // Função para criar corações animados em posições aleatórias
-  function createHearts() {
-    const numHearts = 30;
-    for(let i=0; i<numHearts; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = 100 + Math.random() * 100 + 'vh';
-      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
-      heart.style.opacity = Math.random() * 0.7 + 0.3;
-      heart.style.fontSize = (8 + Math.random() * 10) + 'px';
-      document.body.appendChild(heart);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("timer").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s juntos 💖✨`;
     }
-  }
-  createHearts();
 
-  // Contador de tempo juntos (desde 24 de junho de 2024, 1h00)
-  const startDate = new Date('2024-06-24T01:00:00');
-
-  function updateCounter() {
-    const now = new Date();
-    let diff = Math.floor((now - startDate) / 1000);
-    if(diff < 0) diff = 0;
-
-    const days = Math.floor(diff / (24 * 3600));
-    diff %= 24 * 3600;
-    const hours = Math.floor(diff / 3600);
-    diff %= 3600;
-    const minutes = Math.floor(diff / 60);
-    const seconds = diff % 60;
-
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-  }
-
-  updateCounter();
-  setInterval(updateCounter, 1000);
-</script>
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
 
 </body>
 </html>
