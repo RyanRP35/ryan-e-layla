@@ -43,14 +43,6 @@
       left: 0;
       z-index: -1;
     }
-    /* Player YouTube invisível */
-    #yt-player {
-      width: 0;
-      height: 0;
-      opacity: 0;
-      pointer-events: none;
-      position: absolute;
-    }
   </style>
 </head>
 <body>
@@ -62,8 +54,8 @@
     <p>Com você, cada segundo vale a pena. Nosso amor é leve, forte e infinito. Obrigado por ser minha melhor escolha todos os dias, "saiba que eu te amo, amo noite e dia" 💕</p>
   </div>
 
-  <!-- Player YouTube oculto -->
-  <div id="yt-player"></div>
+  <!-- Áudio local -->
+  <audio id="musica" src="anjos_instrumental.mp3"></audio>
 
   <script>
     // Corações animados
@@ -141,36 +133,15 @@
     setInterval(atualizarContador, 1000);
     atualizarContador();
 
-    // Música do YouTube (instrumental) – toca com o primeiro clique
-    let player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('yt-player', {
-        videoId: '-e02Auq-a1U', // ID do vídeo de "Os Anjos Cantam" instrumental
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          modestbranding: 1,
-          loop: 1,
-          playlist: '-e02Auq-a1U'
-        },
-        events: {
-          onReady: function (event) {
-            document.addEventListener('click', () => {
-              event.target.playVideo();
-            }, { once: true });
-          }
-        }
-      });
-    }
-
-    // Carrega a API do YouTube
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // Música local - inicia com o primeiro clique
+    document.body.addEventListener('click', () => {
+      const audio = document.getElementById('musica');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    }, { once: true });
   </script>
 </body>
 </html>
-
 
 
